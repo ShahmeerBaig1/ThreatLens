@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThreatLens | Analysis Report</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+    @keyframes pulse-glow { 0%,100%{opacity:1} 50%{opacity:.5} }
+    @keyframes slide-up { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+    @keyframes scan-line { 0%{transform:translateY(-100%)} 100%{transform:translateY(100%)} }
+    @keyframes rotate { 100%{transform:rotate(360deg)} }
+
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-slide-up   { animation: slide-up .6s ease-out forwards; }
+
+    .grid-bg {
+        background-image:
+            linear-gradient(rgba(99,102,241,.04) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(99,102,241,.04) 1px,transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    .scan-line {
+        animation: scan-line 3s linear infinite;
+        background: linear-gradient(transparent,rgba(99,102,241,.25),transparent);
+        height: 80px; position: absolute; width: 100%; pointer-events: none; left:0;
+    }
+
+    .stat-card {
+        transition: all .3s ease;
+        opacity: 0;
+    }
+    .stat-card.visible {
+        opacity: 1;
+        animation: slide-up .5s ease-out forwards;
+    }
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(99,102,241,.2);
+    }
+
+    .log-row { transition: all .15s ease; }
+    .log-row:hover { background: rgba(99,102,241,.08); transform: translateX(3px); }
+
+    .severity-badge {
+        display: inline-flex; align-items: center; gap:.4rem;
+        padding:.3rem .85rem; border-radius:9999px;
+        font-weight:700; font-size:.75rem; letter-spacing:.04em;
+    }
+    .severity-high   { background:rgba(239,68,68,.15);   color:#fca5a5; border:1px solid rgba(239,68,68,.35); }
+    .severity-medium { background:rgba(250,204,21,.15);  color:#fde047; border:1px solid rgba(250,204,21,.35); }
+    .severity-low    { background:rgba(34,197,94,.12);   color:#86efac; border:1px solid rgba(34,197,94,.3); }
+
+    .pulse-dot { width:7px;height:7px;border-radius:50%;background:currentColor;
+                 animation:pulse-glow 1.5s ease-in-out infinite;display:inline-block; }
+
+    /* AI report markdown styling */
+    #aiReportContent h1,#aiReportContent h2 { color:#a5b4fc; margin:.9rem 0 .4rem; font-weight:700; }
+    #aiReportContent h3 { color:#c4b5fd; margin:.7rem 0 .3rem; font-weight:600; }
+    #aiReportContent p  { color:#cbd5e1; margin:.5rem 0; line-height:1.7; }
+    #aiReportContent ul,#aiReportContent ol { color:#94a3b8; margin:.5rem 0 .5rem 1.2rem; }
+    #aiReportContent li { margin:.25rem 0; }
+    #aiReportContent strong { color:#e2e8f0; }
+    #aiReportContent code { background:rgba(99,102,241,.15); padding:.15rem .4rem;
+                             border-radius:.3rem; font-family:monospace; color:#a5b4fc; }
+
+    .threat-ring-wrapper { position:relative; display:inline-block; }
+    .threat-ring-wrapper .overlay {
+        position:absolute;inset:0;display:flex;align-items:center;
+        justify-content:center;flex-direction:column; pointer-events:none;
+    }
+
+    .tab-btn { transition: all .2s; }
+    .tab-btn.active { background:rgba(99,102,241,.25); color:#a5b4fc; border-color:rgba(99,102,241,.5); }
+
+    ::-webkit-scrollbar { width:6px; height:6px; }
+    ::-webkit-scrollbar-track { background:rgba(30,41,59,.5); }
+    ::-webkit-scrollbar-thumb { background:rgba(99,102,241,.4); border-radius:3px; }
+</style>
+</head>
+<body class="bg-slate-950 text-slate-100 grid-bg min-h-screen">
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-indigo-500/20 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                </svg>
+            </div>
+            <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">ThreatLens</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 rounded-lg border border-slate-700 text-sm text-slate-300">
+                <span class="pulse-dot bg-green-400"></span> System Active
+            </div>
+            <a href="/analyze" class="px-4 py-2 border border-slate-700 hover:border-indigo-500 text-slate-300 hover:text-indigo-300 rounded-lg text-sm transition-all">
+                ← New Analysis
+            </a>
+            <button onclick="exportReport()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm font-medium transition-all">
+                Export JSON
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ALERT BANNER -->
+<section class="max-w-7xl mx-auto px-6 pt-10">
+    {% set score = threat_score %}
+    {% if score >= 80 %}
+        <div class="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center gap-4 animate-slide-up">
+            <div class="w-11 h-11 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-red-400 animate-pulse-glow" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div>
+                <p class="font-semibold text-red-300">⚠ CRITICAL THREAT LEVEL — Immediate action recommended</p>
+                <p class="text-sm text-slate-400">{{ suspicious }} suspicious events detected in <span class="font-mono text-slate-300">{{ filename }}</span></p>
+            </div>
+        </div>
+    {% elif score >= 50 %}
+        <div class="mb-6 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl flex items-center gap-4 animate-slide-up">
+            <div class="w-11 h-11 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-orange-400 animate-pulse-glow" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div>
+                <p class="font-semibold text-orange-300">HIGH THREAT LEVEL — Investigation needed</p>
+                <p class="text-sm text-slate-400">{{ suspicious }} suspicious events in <span class="font-mono text-slate-300">{{ filename }}</span></p>
+            </div>
+        </div>
+    {% else %}
+        <div class="mb-6 p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center gap-4 animate-slide-up">
+            <div class="w-11 h-11 bg-indigo-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div>
+                <p class="font-semibold text-indigo-300">MODERATE THREAT LEVEL — Monitor closely</p>
+                <p class="text-sm text-slate-400">{{ suspicious }} suspicious events in <span class="font-mono text-slate-300">{{ filename }}</span></p>
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+<!-- KPI CARDS -->
+<section class="max-w-7xl mx-auto px-6 pb-8">
+    <div class="grid md:grid-cols-4 gap-5">
+
+        <!-- Threat Score Ring -->
+        <div class="stat-card md:col-span-1 bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700/60 rounded-2xl p-7 text-center relative overflow-hidden">
+            <div class="scan-line"></div>
+            <p class="text-xs text-slate-400 uppercase tracking-widest mb-4 font-medium">Threat Score</p>
+            <div class="threat-ring-wrapper mx-auto" style="width:160px;height:160px">
+                <canvas id="threatRing" width="160" height="160"></canvas>
+                <div class="overlay">
+                    <p class="text-4xl font-extrabold
+                        {% if threat_score >= 80 %}text-red-400
+                        {% elif threat_score >= 50 %}text-orange-400
+                        {% elif threat_score >= 25 %}text-yellow-400
+                        {% else %}text-green-400{% endif %}">{{ threat_score }}</p>
+                    <p class="text-xs text-slate-400 mt-1">/ 100</p>
+                </div>
+            </div>
+            <p class="mt-4 text-sm font-semibold
+                {% if threat_score >= 80 %}text-red-400
+                {% elif threat_score >= 50 %}text-orange-400
+                {% elif threat_score >= 25 %}text-yellow-400
+                {% else %}text-green-400{% endif %}">
+                {% if threat_score >= 80 %}CRITICAL
+                {% elif threat_score >= 50 %}HIGH
+                {% elif threat_score >= 25 %}MODERATE
+                {% else %}LOW{% endif %}
+            </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stat-card md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-4">
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-5 hover:border-indigo-500/40 transition-all">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Total Events</p>
+                <p class="text-3xl font-bold mt-2 text-slate-100">{{ total }}</p>
+                <p class="text-xs text-slate-500 mt-1">log lines parsed</p>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-5 hover:border-red-500/40 transition-all">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Suspicious</p>
+                <p class="text-3xl font-bold mt-2 text-red-400">{{ suspicious }}</p>
+                <p class="text-xs text-slate-500 mt-1">
+                    {% if total > 0 %}{{ "%.1f"|format(suspicious / total * 100) }}% of traffic{% else %}0%{% endif %}
+                </p>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-5 hover:border-green-500/40 transition-all">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Clean Events</p>
+                <p class="text-3xl font-bold mt-2 text-green-400">{{ total - suspicious }}</p>
+                <p class="text-xs text-slate-500 mt-1">normal traffic</p>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-5 hover:border-red-500/40 transition-all">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">High Severity</p>
+                <p class="text-3xl font-bold mt-2 text-red-400">{{ severity.high }}</p>
+                <p class="text-xs text-slate-500 mt-1">critical/high events</p>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-5 hover:border-yellow-500/40 transition-all">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Medium Severity</p>
+                <p class="text-3xl font-bold mt-2 text-yellow-400">{{ severity.medium }}</p>
+                <p class="text-xs text-slate-500 mt-1">medium events</p>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-5 hover:border-green-500/40 transition-all">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Low Severity</p>
+                <p class="text-3xl font-bold mt-2 text-green-400">{{ severity.low }}</p>
+                <p class="text-xs text-slate-500 mt-1">informational</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CHARTS ROW -->
+<section class="max-w-7xl mx-auto px-6 pb-8 grid md:grid-cols-3 gap-5">
+
+    <!-- Severity Breakdown -->
+    <div class="stat-card bg-slate-900/80 border border-slate-700/60 rounded-2xl p-6">
+        <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Severity Distribution</h3>
+        <div style="height:200px"><canvas id="severityChart"></canvas></div>
+    </div>
+
+    <!-- Attack Category Donut -->
+    <div class="stat-card bg-slate-900/80 border border-slate-700/60 rounded-2xl p-6">
+        <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Attack Categories</h3>
+        <div style="height:200px"><canvas id="categoryChart"></canvas></div>
+    </div>
+
+    <!-- Top IPs -->
+    <div class="stat-card bg-slate-900/80 border border-slate-700/60 rounded-2xl p-6">
+        <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Top Offending IPs</h3>
+        {% if top_ips %}
+            <div class="space-y-3">
+            {% for item in top_ips %}
+                <div class="flex items-center justify-between">
+                    <span class="font-mono text-xs text-slate-300">{{ item.ip }}</span>
+                    <div class="flex items-center gap-2">
+                        <div class="h-1.5 bg-indigo-500/20 rounded-full overflow-hidden" style="width:80px">
+                            <div class="h-full bg-indigo-500 rounded-full"
+                                 style="width: {{ [item.hits * 10, 100]|min }}%"></div>
+                        </div>
+                        <span class="text-xs text-red-400 font-bold w-8 text-right">{{ item.hits }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-sm text-slate-500">No IPs extracted.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- TIMELINE -->
+{% if timeline_labels %}
+<section class="max-w-7xl mx-auto px-6 pb-8">
+    <div class="stat-card bg-slate-900/80 border border-slate-700/60 rounded-2xl p-6">
+        <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Threat Event Timeline</h3>
+        <div style="height:180px"><canvas id="timelineChart"></canvas></div>
+    </div>
+</section>
+{% endif %}
+
+<!-- AI REPORT PANEL -->
+{% if ai_enabled %}
+<section class="max-w-7xl mx-auto px-6 pb-8" id="aiSection">
+    <div class="bg-gradient-to-br from-slate-900 to-slate-800/50 border border-indigo-500/30 rounded-2xl p-7">
+        <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-indigo-300">AI Threat Report</h3>
+                    <p class="text-xs text-slate-400">Powered by Gemini — expert-level analysis</p>
+                </div>
+            </div>
+            <button id="generateAiBtn" onclick="generateAiReport()"
+                    class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-lg text-sm font-semibold transition-all shadow-lg shadow-indigo-500/20">
+                Generate Report
+            </button>
+        </div>
+
+        <div id="aiLoading" class="hidden text-center py-10">
+            <div class="inline-flex items-center gap-3 text-indigo-400">
+                <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                <span>Analyzing threat intelligence...</span>
+            </div>
+        </div>
+
+        <div id="aiReportContent" class="hidden prose-custom"></div>
+    </div>
+</section>
+{% else %}
+<section class="max-w-7xl mx-auto px-6 pb-8">
+    <div class="bg-slate-900/50 border border-slate-700/40 border-dashed rounded-2xl p-7 text-center">
+        <div class="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-slate-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <h3 class="text-slate-400 font-semibold mb-2">AI Report Disabled</h3>
+        <p class="text-sm text-slate-500 max-w-sm mx-auto">
+            Set <code class="bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">ENABLE_AI=true</code> and
+            <code class="bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">GEMINI_API_KEY=AIza...</code>
+            to unlock AI-powered threat reports.
+        </p>
+    </div>
+</section>
+{% endif %}
+
+<!-- LOG TABLE -->
+<section class="max-w-7xl mx-auto px-6 pb-16">
+    <div class="bg-slate-900/80 border border-slate-700/60 rounded-2xl overflow-hidden">
+
+        <!-- Table Header + Filters -->
+        <div class="px-6 py-5 border-b border-slate-700/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h3 class="text-base font-semibold text-slate-200">Suspicious Log Entries</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Showing up to 100 most recent detections</p>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+                <button class="tab-btn active px-3 py-1.5 rounded-lg text-xs border border-slate-600 text-slate-300 font-medium"
+                        onclick="filterTable('all', this)">All</button>
+                <button class="tab-btn px-3 py-1.5 rounded-lg text-xs border border-slate-600 text-slate-300 font-medium"
+                        onclick="filterTable('high', this)">High</button>
+                <button class="tab-btn px-3 py-1.5 rounded-lg text-xs border border-slate-600 text-slate-300 font-medium"
+                        onclick="filterTable('medium', this)">Medium</button>
+                <button class="tab-btn px-3 py-1.5 rounded-lg text-xs border border-slate-600 text-slate-300 font-medium"
+                        onclick="filterTable('low', this)">Low</button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-slate-800/60 text-slate-400 text-xs uppercase tracking-wider">
+                    <tr>
+                        <th class="px-5 py-3">Timestamp</th>
+                        <th class="px-5 py-3">Severity</th>
+                        <th class="px-5 py-3">Type</th>
+                        <th class="px-5 py-3">Source IP</th>
+                        <th class="px-5 py-3">Log Entry</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/50" id="logTableBody">
+                {% for item in details %}
+                    <tr class="log-row" data-severity="{{ item.severity_key }}">
+                        <td class="px-5 py-3 font-mono text-xs text-slate-400 whitespace-nowrap">
+                            {{ item.timestamp }}
+                        </td>
+                        <td class="px-5 py-3">
+                            <span class="severity-badge {{ item.severity_badge }}">
+                                <span class="pulse-dot"></span>{{ item.severity }}
+                            </span>
+                        </td>
+                        <td class="px-5 py-3 text-xs text-slate-300 whitespace-nowrap">
+                            {{ item.reason }}
+                        </td>
+                        <td class="px-5 py-3 font-mono text-xs text-indigo-300">
+                            {{ item.ip }}
+                        </td>
+                        <td class="px-5 py-3 font-mono text-xs text-slate-400 max-w-xs truncate" title="{{ item.log }}">
+                            {{ item.log }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if not details %}
+        <div class="text-center py-14 text-slate-500">
+            <svg class="w-10 h-10 mx-auto mb-3 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <p class="font-medium">No suspicious events found</p>
+            <p class="text-sm mt-1">This log file looks clean.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<footer class="border-t border-slate-800 bg-slate-900/50 py-6">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-sm text-slate-500">
+        <p>ThreatLens · Cybersecurity Demo Platform</p>
+        <div class="flex gap-4">
+            <a href="/analyze" class="hover:text-indigo-400 transition-colors">New Analysis</a>
+            <a href="/generator" class="hover:text-indigo-400 transition-colors">Log Generator</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ── Data from Flask ───────────────────────────
+const THREAT_SCORE  = {{ threat_score }};
+const SEVERITY      = { low: {{ severity.low }}, medium: {{ severity.medium }}, high: {{ severity.high }} };
+const CAT_LABELS    = {{ cat_labels | tojson }};
+const CAT_VALUES    = {{ cat_values | tojson }};
+const TL_LABELS     = {{ timeline_labels | tojson }};
+const TL_VALUES     = {{ timeline_values | tojson }};
+const AI_ENABLED    = {{ 'true' if ai_enabled else 'false' }};
+
+const ANALYSIS_SUMMARY = {
+    total: {{ total }},
+    suspicious: {{ suspicious }},
+    threat_score: {{ threat_score }},
+    severity: SEVERITY,
+    top_ips: {{ top_ips | tojson }},
+    category_counts: {{ category_counts | tojson }},
+};
+const SAMPLE_LOGS = {{ details[:30] | tojson }};
+
+// ── Threat Ring ───────────────────────────────
+const ringColor =
+    THREAT_SCORE >= 80 ? 'rgba(239,68,68,.85)'  :
+    THREAT_SCORE >= 50 ? 'rgba(249,115,22,.85)' :
+    THREAT_SCORE >= 25 ? 'rgba(234,179,8,.85)'  : 'rgba(34,197,94,.85)';
+
+new Chart(document.getElementById('threatRing').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+        datasets: [{
+            data: [THREAT_SCORE, 100 - THREAT_SCORE],
+            backgroundColor: [ringColor, 'rgba(30,41,59,.4)'],
+            borderColor: [ringColor.replace('.85','1'), 'rgba(71,85,105,.4)'],
+            borderWidth: 2
+        }]
+    },
+    options: { cutout:'78%', plugins:{legend:{display:false},tooltip:{enabled:false}},
+               animation:{animateRotate:true,animateScale:true} }
+});
+
+// ── Severity Bar ──────────────────────────────
+new Chart(document.getElementById('severityChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+        labels: ['Low','Medium','High'],
+        datasets: [{
+            data: [SEVERITY.low, SEVERITY.medium, SEVERITY.high],
+            backgroundColor: ['rgba(34,197,94,.5)','rgba(250,204,21,.5)','rgba(239,68,68,.5)'],
+            borderColor:      ['rgba(34,197,94,1)', 'rgba(250,204,21,1)', 'rgba(239,68,68,1)'],
+            borderWidth: 2, borderRadius: 6
+        }]
+    },
+    options: {
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+            y:{beginAtZero:true, grid:{color:'rgba(71,85,105,.15)'}, ticks:{color:'#94a3b8'}},
+            x:{grid:{display:false}, ticks:{color:'#94a3b8'}}
+        }
+    }
+});
+
+// ── Category Donut ────────────────────────────
+const catColors = ['#6366f1','#8b5cf6','#ec4899','#f97316','#14b8a6','#06b6d4','#84cc16','#f59e0b'];
+if (CAT_LABELS.length > 0) {
+    new Chart(document.getElementById('categoryChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+            labels: CAT_LABELS,
+            datasets: [{
+                data: CAT_VALUES,
+                backgroundColor: catColors.slice(0, CAT_LABELS.length).map(c => c + 'cc'),
+                borderColor: catColors.slice(0, CAT_LABELS.length),
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive:true, maintainAspectRatio:false, cutout:'60%',
+            plugins:{
+                legend:{
+                    position:'right',
+                    labels:{color:'#94a3b8', font:{size:10}, boxWidth:10, padding:8}
+                },
+                tooltip:{
+                    backgroundColor:'rgba(15,23,42,.9)', titleColor:'#f8fafc',
+                    bodyColor:'#cbd5e1', borderColor:'rgba(99,102,241,.4)', borderWidth:1
+                }
+            }
+        }
+    });
+}
+
+// ── Timeline ──────────────────────────────────
+if (TL_LABELS.length > 0) {
+    new Chart(document.getElementById('timelineChart').getContext('2d'), {
+        type:'line',
+        data:{
+            labels: TL_LABELS,
+            datasets:[{
+                label:'Threat Events',
+                data: TL_VALUES,
+                borderColor:'rgba(239,68,68,.8)',
+                backgroundColor: (ctx) => {
+                    const g = ctx.chart.ctx.createLinearGradient(0,0,0,180);
+                    g.addColorStop(0,'rgba(239,68,68,.3)');
+                    g.addColorStop(1,'rgba(239,68,68,.0)');
+                    return g;
+                },
+                borderWidth:2, fill:true, tension:.4,
+                pointRadius:3, pointBackgroundColor:'rgba(239,68,68,1)',
+                pointBorderColor:'rgba(15,23,42,1)', pointBorderWidth:2, pointHoverRadius:5
+            }]
+        },
+        options:{
+            responsive:true, maintainAspectRatio:false,
+            interaction:{intersect:false, mode:'index'},
+            plugins:{
+                legend:{display:false},
+                tooltip:{
+                    backgroundColor:'rgba(15,23,42,.9)', titleColor:'#f8fafc',
+                    bodyColor:'#cbd5e1', borderColor:'rgba(99,102,241,.4)', borderWidth:1,
+                    displayColors:false
+                }
+            },
+            scales:{
+                y:{beginAtZero:true, grid:{color:'rgba(71,85,105,.15)'}, ticks:{color:'#94a3b8'}},
+                x:{grid:{display:false}, ticks:{color:'#94a3b8', maxTicksLimit:12}}
+            }
+        }
+    });
+}
+
+// ── Animate cards in ─────────────────────────
+document.querySelectorAll('.stat-card').forEach((card, i) => {
+    setTimeout(() => card.classList.add('visible'), i * 80);
+});
+
+// ── Filter table ──────────────────────────────
+function filterTable(sev, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#logTableBody tr').forEach(row => {
+        row.style.display = (sev === 'all' || row.dataset.severity === sev) ? '' : 'none';
+    });
+}
+
+// ── Export ────────────────────────────────────
+function exportReport() {
+    const data = {
+        filename: "{{ filename }}",
+        analyzed_at: new Date().toISOString(),
+        summary: ANALYSIS_SUMMARY,
+        events: SAMPLE_LOGS
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'threatlens_report.json';
+    a.click();
+}
+
+// ── AI Report ────────────────────────────────
+async function generateAiReport() {
+    const btn = document.getElementById('generateAiBtn');
+    const loading = document.getElementById('aiLoading');
+    const content = document.getElementById('aiReportContent');
+
+    btn.disabled = true;
+    btn.textContent = 'Generating...';
+    loading.classList.remove('hidden');
+    content.classList.add('hidden');
+
+    try {
+        const res = await fetch('/ai-report', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({summary: ANALYSIS_SUMMARY, sample_logs: SAMPLE_LOGS})
+        });
+        const data = await res.json();
+        loading.classList.add('hidden');
+
+        if (data.enabled && data.report) {
+            content.innerHTML = marked.parse(data.report);
+            content.classList.remove('hidden');
+            btn.textContent = '↺ Regenerate';
+        } else {
+            content.innerHTML = `<p class="text-red-400">${data.message || 'AI analysis unavailable.'}</p>`;
+            content.classList.remove('hidden');
+            btn.textContent = 'Generate Report';
+        }
+    } catch(e) {
+        loading.classList.add('hidden');
+        content.innerHTML = '<p class="text-red-400">Request failed. Check server logs.</p>';
+        content.classList.remove('hidden');
+        btn.textContent = 'Generate Report';
+    }
+    btn.disabled = false;
+}
+</script>
+</body>
+</html>

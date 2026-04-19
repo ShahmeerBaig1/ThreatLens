@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThreatLens | Cyber Threat Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 overflow-x-hidden">
+
+<section class="relative min-h-screen flex flex-col justify-center items-center px-6">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/10 to-transparent blur-3xl"></div>
+
+    <!-- grid overlay -->
+    <div class="absolute inset-0" style="background-image:linear-gradient(rgba(99,102,241,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.04) 1px,transparent 1px);background-size:50px 50px;"></div>
+
+    <div class="relative z-10 text-center max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-sm text-indigo-300 mb-8 font-medium">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            Rule-based + AI-powered threat detection
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">
+            <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Threat</span><span class="text-white">Lens</span>
+        </h1>
+
+        <p class="mt-6 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Upload server logs. Get instant threat scoring, pattern detection, IP analysis, and optional AI-generated security reports.
+        </p>
+
+        <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
+            <a href="/analyze"
+               class="px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 transition text-lg font-semibold shadow-xl shadow-indigo-500/20">
+                Analyze Logs →
+            </a>
+            <a href="/generator"
+               class="px-8 py-4 rounded-xl border border-indigo-500/50 text-indigo-400 hover:bg-indigo-500/10 transition text-lg font-semibold">
+                Generate Demo Logs
+            </a>
+        </div>
+    </div>
+
+    <div class="absolute bottom-10 text-slate-500 text-sm animate-bounce">↓ Explore</div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-8">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-indigo-500/60 transition-all hover:-translate-y-1 duration-300">
+        <div class="w-10 h-10 bg-indigo-500/15 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-indigo-400">Smart Detection</h3>
+        <p class="mt-3 text-slate-400 text-sm leading-relaxed">
+            Weighted pattern matching for SQL injection, XSS, path traversal, brute-force bursts, port scans, and more. Real threat scores, not random numbers.
+        </p>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-purple-500/60 transition-all hover:-translate-y-1 duration-300">
+        <div class="w-10 h-10 bg-purple-500/15 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-purple-400">AI Reports</h3>
+        <p class="mt-3 text-slate-400 text-sm leading-relaxed">
+            Optionally connect Gemini to get executive summaries, attacker profiling, and concrete remediation steps. Gracefully disabled when no API key is set.
+        </p>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/60 transition-all hover:-translate-y-1 duration-300">
+        <div class="w-10 h-10 bg-cyan-500/15 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-cyan-400">Visual Intelligence</h3>
+        <p class="mt-3 text-slate-400 text-sm leading-relaxed">
+            Interactive charts: severity distribution, attack categories, timeline view, top offending IPs, and a real-time threat score gauge.
+        </p>
+    </div>
+</section>
+
+<footer class="border-t border-slate-800 py-6 text-center text-slate-500 text-sm">
+    ThreatLens · Cybersecurity Demo Platform
+</footer>
+</body>
+</html>

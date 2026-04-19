@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThreatLens | Log Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+
+<nav class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex justify-between">
+    <h1 class="text-xl font-bold text-indigo-400">ThreatLens</h1>
+    <a href="/" class="text-slate-400 hover:text-indigo-400">Analyzer</a>
+</nav>
+
+<div class="max-w-3xl mx-auto py-12 px-6">
+
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-8">
+        <h2 class="text-2xl font-semibold mb-6">Demo Log Generator</h2>
+
+        <div class="space-y-5">
+            <input id="filename" placeholder="Filename (attack.log)"
+                   class="w-full p-3 bg-slate-800 rounded-lg border border-slate-700">
+
+            <input id="lines" type="number" value="200"
+                   class="w-full p-3 bg-slate-800 rounded-lg border border-slate-700">
+
+            <input id="attack" type="range" min="0" max="1" step="0.05" value="0.2"
+                   class="w-full">
+
+            <p class="text-sm text-slate-400">
+                Attack Intensity: <span id="attackValue">0.20</span>
+            </p>
+
+            <button onclick="generateLogs()"
+                    class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium">
+                Generate Logs
+            </button>
+
+            <div id="status" class="text-green-400 hidden"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const slider = document.getElementById("attack");
+const value = document.getElementById("attackValue");
+
+slider.oninput = () => value.textContent = slider.value;
+
+function generateLogs() {
+    fetch("/generate-logs", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            filename: document.getElementById("filename").value || "demo.log",
+            lines: document.getElementById("lines").value,
+            attack_ratio: slider.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        const status = document.getElementById("status");
+        status.textContent = data.message + " (" + data.filename + ")";
+        status.classList.remove("hidden");
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThreatLens | Log Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes slide-up  { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+        @keyframes pulse-glow{ 0%,100%{opacity:1} 50%{opacity:.4} }
+        @keyframes spin      { 100%{transform:rotate(360deg)} }
+        @keyframes fade-msg  { 0%{opacity:0;transform:translateX(-6px)} 12%{opacity:1;transform:translateX(0)} 85%{opacity:1} 100%{opacity:0} }
+        @keyframes bar-fill  { from{width:0} to{width:100%} }
+        @keyframes counter   { from{opacity:.4} to{opacity:1} }
+        @keyframes glow-pulse{ 0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,0)} 50%{box-shadow:0 0 20px 4px rgba(99,102,241,.25)} }
+        @keyframes tick-in   { from{transform:scale(0) rotate(-15deg);opacity:0} to{transform:scale(1) rotate(0);opacity:1} }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(99,102,241,.04) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(99,102,241,.04) 1px,transparent 1px);
+            background-size:50px 50px;
+        }
+        .enter-1{animation:slide-up .5s .05s ease-out both}
+        .enter-2{animation:slide-up .5s .15s ease-out both}
+        .enter-3{animation:slide-up .5s .25s ease-out both}
+        .enter-4{animation:slide-up .5s .35s ease-out both}
+        .enter-5{animation:slide-up .5s .45s ease-out both}
+
+        .pulse-dot{width:7px;height:7px;border-radius:50%;display:inline-block;animation:pulse-glow 1.5s ease-in-out infinite}
+
+        /* Range slider */
+        input[type=range] { -webkit-appearance:none; appearance:none; height:6px; border-radius:999px; outline:none; cursor:pointer; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; cursor:pointer; transition:transform .15s; }
+        input[type=range]::-webkit-slider-thumb:active { transform:scale(1.3); }
+
+        .gen-btn { position:relative; overflow:hidden; transition:all .3s cubic-bezier(.34,1.56,.64,1); }
+        .gen-btn::after {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+            transform:translateX(-100%); transition:transform .5s;
+        }
+        .gen-btn:not(:disabled):hover::after { transform:translateX(100%); }
+        .gen-btn:not(:disabled):active { transform:scale(.97); }
+
+        .log-stream-line { animation: fade-msg 4.5s ease-in-out forwards; }
+
+        .intensity-low    { --thumb-color:#4ade80; }
+        .intensity-medium { --thumb-color:#facc15; }
+        .intensity-high   { --thumb-color:#f87171; }
+
+        input[type=range]::-webkit-slider-thumb { background: var(--thumb-color, #818cf8); }
+
+        .success-tick { animation: tick-in .4s cubic-bezier(.34,1.56,.64,1) forwards; }
+        .card-glow { animation: glow-pulse 2s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 grid-bg min-h-screen">
+
+<nav class="bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 px-6 py-4 flex justify-between sticky top-0 z-50">
+    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">ThreatLens</h1>
+    <a href="/analyze" class="text-slate-400 hover:text-indigo-400 transition-colors text-sm flex items-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+        Analyzer
+    </a>
+</nav>
+
+<div class="fixed inset-0 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/8 via-indigo-600/5 to-transparent blur-3xl"></div>
+</div>
+
+<div class="max-w-2xl mx-auto py-14 px-6 relative z-10">
+
+    <div class="enter-1 mb-8">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="pulse-dot bg-purple-400"></span>
+            <span class="text-xs text-slate-400 uppercase tracking-widest font-medium">Log Synthesis Engine</span>
+        </div>
+        <h2 class="text-3xl font-bold tracking-tight">Demo Log Generator</h2>
+        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Synthesize realistic log files with configurable attack traffic for testing your detection pipeline.</p>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl shadow-black/40 space-y-6">
+
+        <!-- Filename -->
+        <div class="enter-2">
+            <label class="block text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Output Filename</label>
+            <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-mono">/logs/ </span>
+                <input id="filename" placeholder="attack.log" value="demo.log"
+                       class="w-full pl-12 pr-4 ml-2 py-3 bg-slate-800 rounded-xl border border-slate-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-all font-mono text-sm placeholder:text-slate-600">
+            </div>
+        </div>
+
+        <!-- Log Lines -->
+        <div class="enter-3">
+            <label class="block text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Log Lines</label>
+            <div class="flex gap-3">
+                <input id="lines" type="number" value="200" min="10" max="10000"
+                       class="w-full py-3 px-4 bg-slate-800 rounded-xl border border-slate-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-all font-mono text-sm">
+                <div class="flex gap-2">
+                    <button type="button" onclick="setLines(100)"  class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 hover:border-slate-500 text-xs text-slate-400 transition-all font-mono">100</button>
+                    <button type="button" onclick="setLines(500)"  class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 hover:border-slate-500 text-xs text-slate-400 transition-all font-mono">500</button>
+                    <button type="button" onclick="setLines(1000)" class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 hover:border-slate-500 text-xs text-slate-400 transition-all font-mono">1k</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attack Intensity Slider -->
+        <div class="enter-4">
+            <div class="flex justify-between items-center mb-3">
+                <label class="text-xs text-slate-400 uppercase tracking-wider font-medium">Attack Intensity</label>
+                <div id="intensityBadge" class="px-2.5 py-1 rounded-full text-xs font-bold border transition-all duration-300">
+                    LOW
+                </div>
+            </div>
+
+            <input id="attack" type="range" min="0" max="1" step="0.01" value="0.2"
+                   class="w-full intensity-low"
+                   style="background: linear-gradient(to right, #818cf8 20%, #334155 20%)">
+
+            <div class="flex justify-between text-xs text-slate-600 mt-1.5">
+                <span>Clean</span>
+                <span>Mixed</span>
+                <span>Heavy Attack</span>
+            </div>
+
+            <!-- Live preview -->
+            <div id="intensityPreview" class="mt-4 p-3 bg-slate-800/60 rounded-xl border border-slate-700/50 grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <p class="text-xs text-slate-500 mb-1">Clean Lines</p>
+                    <p id="previewClean" class="text-sm font-bold text-green-400 font-mono">160</p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-500 mb-1">Attack Lines</p>
+                    <p id="previewAttack" class="text-sm font-bold text-red-400 font-mono">40</p>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-500 mb-1">Ratio</p>
+                    <p id="previewRatio" class="text-sm font-bold text-indigo-400 font-mono">20%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="enter-5">
+            <button id="generateBtn" onclick="generateLogs()"
+                    class="gen-btn w-full py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold text-base tracking-wide shadow-lg shadow-purple-500/20 transition-all">
+                <span id="genBtnContent" class="flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                    </svg>
+                    Generate Logs
+                </span>
+            </button>
+
+            <!-- Log stream output -->
+            <div id="logStream" class="hidden mt-4 bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-xs space-y-1 max-h-48 overflow-hidden">
+                <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-800">
+                    <span class="pulse-dot bg-green-400"></span>
+                    <span class="text-green-400">Synthesis active</span>
+                </div>
+                <div id="logLines"></div>
+            </div>
+
+            <!-- Success state -->
+            <div id="successCard" class="hidden mt-4 p-4 bg-green-500/10 border border-green-500/30 rounded-xl flex items-center gap-4">
+                <div id="successTick" class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div>
+                    <p id="successMsg" class="text-sm font-semibold text-green-300"></p>
+                    <a id="analyzeLink" href="/analyze" class="text-xs text-indigo-400 hover:text-indigo-300 underline mt-0.5 inline-block">→ Analyze this file now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const attackSlider = document.getElementById('attack');
+const badge        = document.getElementById('intensityBadge');
+const genBtn       = document.getElementById('generateBtn');
+const genBtnContent= document.getElementById('genBtnContent');
+const logStream    = document.getElementById('logStream');
+const logLines     = document.getElementById('logLines');
+const successCard  = document.getElementById('successCard');
+const successMsg   = document.getElementById('successMsg');
+
+function setLines(n) { document.getElementById('lines').value = n; updatePreview(); }
+
+function updatePreview() {
+    const ratio = parseFloat(attackSlider.value);
+    const total = parseInt(document.getElementById('lines').value) || 200;
+    const atk   = Math.round(total * ratio);
+    const clean = total - atk;
+    const pct   = Math.round(ratio * 100);
+
+    document.getElementById('previewClean').textContent  = clean.toLocaleString();
+    document.getElementById('previewAttack').textContent = atk.toLocaleString();
+    document.getElementById('previewRatio').textContent  = pct + '%';
+
+    // Slider track fill
+    attackSlider.style.background = `linear-gradient(to right, #818cf8 ${pct}%, #334155 ${pct}%)`;
+
+    // Thumb color + badge
+    if (ratio < 0.3) {
+        attackSlider.className = 'w-full intensity-low';
+        badge.textContent = 'LOW';
+        badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold border transition-all duration-300 text-green-400 border-green-500/40 bg-green-500/10';
+    } else if (ratio < 0.65) {
+        attackSlider.className = 'w-full intensity-medium';
+        badge.textContent = 'MEDIUM';
+        badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold border transition-all duration-300 text-yellow-400 border-yellow-500/40 bg-yellow-500/10';
+    } else {
+        attackSlider.className = 'w-full intensity-high';
+        badge.textContent = 'HIGH';
+        badge.className = 'px-2.5 py-1 rounded-full text-xs font-bold border transition-all duration-300 text-red-400 border-red-500/40 bg-red-500/10';
+    }
+}
+attackSlider.addEventListener('input', updatePreview);
+document.getElementById('lines').addEventListener('input', updatePreview);
+updatePreview();
+
+const synthMsgs = [
+    '[SYN] Initializing log synthesizer...',
+    '[GEN] Seeding random event graph...',
+    '[IP]  Generating source IP pool...',
+    '[LOG] Writing normal access entries...',
+    '[ATK] Injecting attack signatures...',
+    '[INJ] SQL injection patterns → applied',
+    '[BRF] Brute-force sequences → applied',
+    '[XSS] Cross-site scripting → applied',
+    '[PATH] Path traversal payloads → applied',
+    '[TS]  Randomizing timestamps...',
+    '[OUT] Writing to disk...',
+    '[DONE] File ready.',
+];
+
+function pushLogLine(msg, color = '#94a3b8') {
+    const el = document.createElement('div');
+    el.className = 'log-stream-line';
+    el.style.color = color;
+    el.textContent = msg;
+    logLines.appendChild(el);
+    logLines.scrollTop = logLines.scrollHeight;
+    setTimeout(() => el.style.opacity = '0', 4000);
+}
+
+function generateLogs() {
+    const filename     = document.getElementById('filename').value || 'demo.log';
+    const lines        = document.getElementById('lines').value;
+    const attack_ratio = attackSlider.value;
+
+    // Reset UI
+    genBtn.disabled = true;
+    successCard.classList.add('hidden');
+    logLines.innerHTML = '';
+    logStream.classList.remove('hidden');
+    genBtnContent.innerHTML = `
+        <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+        </svg>
+        Synthesizing...`;
+
+    // Stream fake log lines before server responds
+    let msgIdx = 0;
+    const streamIv = setInterval(() => {
+        if (msgIdx < synthMsgs.length) {
+            const color = synthMsgs[msgIdx].includes('ATK') || synthMsgs[msgIdx].includes('INJ') ||
+                          synthMsgs[msgIdx].includes('BRF') || synthMsgs[msgIdx].includes('XSS') ||
+                          synthMsgs[msgIdx].includes('PATH') ? '#f87171' : '#94a3b8';
+            pushLogLine(synthMsgs[msgIdx], color);
+            msgIdx++;
+        }
+    }, 350);
+
+    fetch('/generate-logs', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ filename, lines, attack_ratio })
+    })
+    .then(r => r.json())
+    .then(data => {
+        clearInterval(streamIv);
+        pushLogLine('[✓]  ' + (data.message || 'Done.'), '#4ade80');
+
+        setTimeout(() => {
+            logStream.classList.add('hidden');
+            genBtn.disabled = false;
+            genBtnContent.innerHTML = `
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                </svg>
+                Generate Again`;
+
+            successMsg.textContent = data.message + ' · ' + (data.filename || filename);
+            successCard.classList.remove('hidden');
+            successCard.style.animation = 'slide-up .5s ease-out';
+            document.getElementById('successTick').style.animation = 'tick-in .4s .1s cubic-bezier(.34,1.56,.64,1) both';
+        }, 800);
+    })
+    .catch(() => {
+        clearInterval(streamIv);
+        pushLogLine('[ERR] Request failed — check server.', '#f87171');
+        genBtn.disabled = false;
+        genBtnContent.textContent = 'Generate Logs';
+    });
+}
+</script>
+</body>
+</html>
