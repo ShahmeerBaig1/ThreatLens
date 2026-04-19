@@ -1,0 +1,200 @@
+INFO 2026-02-04 15:34:47 User 'root' logged in from 172.16.0.12
+INFO 2026-02-04 15:34:51 Resource accessed /admin by root
+INFO 2026-02-04 15:34:55 POST request to / from 192.168.1.10
+INFO 2026-02-04 15:34:59 Resource accessed / by admin
+INFO 2026-02-04 15:35:03 User 'john' logged in from 172.16.0.12
+INFO 2026-02-04 15:35:07 Resource accessed /dashboard by guest
+INFO 2026-02-04 15:35:11 User 'root' logged in from 192.168.1.10
+INFO 2026-02-04 15:35:15 Resource accessed /login by john
+CRITICAL 2026-02-04 15:35:19 Possible SQL injection attempt detected from 103.21.244.0
+INFO 2026-02-04 15:35:23 User 'guest' logged in from 172.16.0.12
+INFO 2026-02-04 15:35:27 Resource accessed /login by alice
+INFO 2026-02-04 15:35:31 User 'admin' logged in from 10.0.0.5
+INFO 2026-02-04 15:35:35 POST request to /login from 192.168.1.10
+INFO 2026-02-04 15:35:39 Resource accessed /dashboard by root
+ALERT 2026-02-04 15:35:43 Unauthorized access attempt to /admin from 103.21.244.0
+INFO 2026-02-04 15:35:47 Resource accessed /api/data by admin
+INFO 2026-02-04 15:35:51 GET request to /api/data from 192.168.1.10
+WARNING 2026-02-04 15:35:55 Failed password for invalid user alice from 45.33.32.156
+WARNING 2026-02-04 15:35:59 Failed password for invalid user alice from 185.220.101.45
+CRITICAL 2026-02-04 15:36:03 Possible SQL injection attempt detected from 185.220.101.45
+INFO 2026-02-04 15:36:07 POST request to /login from 172.16.0.12
+INFO 2026-02-04 15:36:11 POST request to /dashboard from 172.16.0.12
+INFO 2026-02-04 15:36:15 Resource accessed /login by alice
+INFO 2026-02-04 15:36:19 Resource accessed /login by alice
+INFO 2026-02-04 15:36:23 GET request to /dashboard from 192.168.1.10
+INFO 2026-02-04 15:36:27 Resource accessed /dashboard by john
+INFO 2026-02-04 15:36:31 Resource accessed / by john
+INFO 2026-02-04 15:36:35 User 'admin' logged in from 10.0.0.5
+INFO 2026-02-04 15:36:39 Resource accessed /api/data by alice
+INFO 2026-02-04 15:36:43 User 'john' logged in from 172.16.0.12
+INFO 2026-02-04 15:36:47 Resource accessed / by john
+INFO 2026-02-04 15:36:51 Resource accessed /dashboard by admin
+INFO 2026-02-04 15:36:55 GET request to /dashboard from 172.16.0.12
+INFO 2026-02-04 15:36:59 Resource accessed /dashboard by alice
+INFO 2026-02-04 15:37:03 User 'guest' logged in from 10.0.0.5
+INFO 2026-02-04 15:37:07 POST request to /api/data from 192.168.1.10
+INFO 2026-02-04 15:37:11 GET request to / from 172.16.0.12
+INFO 2026-02-04 15:37:15 GET request to /admin from 192.168.1.10
+INFO 2026-02-04 15:37:19 User 'john' logged in from 10.0.0.5
+INFO 2026-02-04 15:37:23 User 'root' logged in from 172.16.0.12
+INFO 2026-02-04 15:37:27 Resource accessed /admin by john
+INFO 2026-02-04 15:37:31 GET request to /login from 10.0.0.5
+WARNING 2026-02-04 15:37:35 Directory traversal attempt ../ from 185.220.101.45
+INFO 2026-02-04 15:37:39 POST request to /admin from 172.16.0.12
+WARNING 2026-02-04 15:37:43 Directory traversal attempt ../ from 103.21.244.0
+CRITICAL 2026-02-04 15:37:47 Possible SQL injection attempt detected from 45.33.32.156
+INFO 2026-02-04 15:37:51 Resource accessed /login by john
+INFO 2026-02-04 15:37:55 Resource accessed /login by john
+INFO 2026-02-04 15:37:59 Resource accessed /api/data by root
+INFO 2026-02-04 15:38:03 Resource accessed /login by john
+WARNING 2026-02-04 15:38:07 Failed password for invalid user alice from 45.33.32.156
+INFO 2026-02-04 15:38:11 GET request to /api/data from 192.168.1.10
+INFO 2026-02-04 15:38:15 GET request to / from 10.0.0.5
+ERROR 2026-02-04 15:38:19 Authentication failure for guest from 103.21.244.0
+INFO 2026-02-04 15:38:23 GET request to /admin from 192.168.1.10
+INFO 2026-02-04 15:38:27 User 'admin' logged in from 192.168.1.10
+INFO 2026-02-04 15:38:31 Resource accessed /login by root
+INFO 2026-02-04 15:38:35 GET request to /api/data from 10.0.0.5
+INFO 2026-02-04 15:38:39 Resource accessed / by john
+INFO 2026-02-04 15:38:43 Resource accessed / by alice
+INFO 2026-02-04 15:38:47 POST request to /dashboard from 192.168.1.10
+INFO 2026-02-04 15:38:51 Resource accessed /login by alice
+INFO 2026-02-04 15:38:55 GET request to /admin from 192.168.1.10
+INFO 2026-02-04 15:38:59 Resource accessed / by admin
+INFO 2026-02-04 15:39:03 User 'admin' logged in from 172.16.0.12
+INFO 2026-02-04 15:39:07 GET request to /login from 10.0.0.5
+INFO 2026-02-04 15:39:11 Resource accessed / by john
+INFO 2026-02-04 15:39:15 Resource accessed /dashboard by guest
+INFO 2026-02-04 15:39:19 User 'alice' logged in from 172.16.0.12
+INFO 2026-02-04 15:39:23 Resource accessed /api/data by root
+INFO 2026-02-04 15:39:27 User 'root' logged in from 10.0.0.5
+INFO 2026-02-04 15:39:31 User 'root' logged in from 10.0.0.5
+INFO 2026-02-04 15:39:35 User 'alice' logged in from 172.16.0.12
+INFO 2026-02-04 15:39:39 POST request to / from 172.16.0.12
+ALERT 2026-02-04 15:39:43 Unauthorized access attempt to /admin from 45.33.32.156
+CRITICAL 2026-02-04 15:39:47 Possible SQL injection attempt detected from 103.21.244.0
+INFO 2026-02-04 15:39:51 Resource accessed /dashboard by guest
+INFO 2026-02-04 15:39:55 GET request to /dashboard from 192.168.1.10
+WARNING 2026-02-04 15:39:59 Directory traversal attempt ../ from 45.33.32.156
+INFO 2026-02-04 15:40:03 Resource accessed / by guest
+INFO 2026-02-04 15:40:07 POST request to / from 10.0.0.5
+INFO 2026-02-04 15:40:11 Resource accessed /dashboard by alice
+INFO 2026-02-04 15:40:15 Resource accessed /api/data by root
+INFO 2026-02-04 15:40:19 Resource accessed /dashboard by guest
+WARNING 2026-02-04 15:40:23 Failed password for invalid user john from 45.33.32.156
+INFO 2026-02-04 15:40:27 User 'guest' logged in from 172.16.0.12
+INFO 2026-02-04 15:40:31 Resource accessed /dashboard by john
+CRITICAL 2026-02-04 15:40:35 Possible SQL injection attempt detected from 185.220.101.45
+INFO 2026-02-04 15:40:39 GET request to /login from 10.0.0.5
+INFO 2026-02-04 15:40:43 User 'root' logged in from 192.168.1.10
+ERROR 2026-02-04 15:40:47 Authentication failure for root from 185.220.101.45
+INFO 2026-02-04 15:40:51 User 'alice' logged in from 192.168.1.10
+INFO 2026-02-04 15:40:55 User 'john' logged in from 10.0.0.5
+WARNING 2026-02-04 15:40:59 Failed password for invalid user alice from 103.21.244.0
+INFO 2026-02-04 15:41:03 GET request to /dashboard from 10.0.0.5
+INFO 2026-02-04 15:41:07 Resource accessed / by admin
+INFO 2026-02-04 15:41:11 GET request to / from 192.168.1.10
+INFO 2026-02-04 15:41:15 POST request to /dashboard from 192.168.1.10
+INFO 2026-02-04 15:41:19 Resource accessed /api/data by root
+INFO 2026-02-04 15:41:23 User 'alice' logged in from 172.16.0.12
+ERROR 2026-02-04 15:41:27 Authentication failure for root from 185.220.101.45
+INFO 2026-02-04 15:41:31 POST request to /dashboard from 10.0.0.5
+INFO 2026-02-04 15:41:35 POST request to /dashboard from 192.168.1.10
+INFO 2026-02-04 15:41:39 GET request to / from 172.16.0.12
+INFO 2026-02-04 15:41:43 Resource accessed /dashboard by john
+INFO 2026-02-04 15:41:47 POST request to /login from 10.0.0.5
+INFO 2026-02-04 15:41:51 POST request to / from 10.0.0.5
+INFO 2026-02-04 15:41:55 Resource accessed /login by admin
+ERROR 2026-02-04 15:41:59 Authentication failure for john from 185.220.101.45
+ERROR 2026-02-04 15:42:03 Authentication failure for guest from 103.21.244.0
+INFO 2026-02-04 15:42:07 GET request to /dashboard from 10.0.0.5
+INFO 2026-02-04 15:42:11 POST request to /dashboard from 172.16.0.12
+INFO 2026-02-04 15:42:15 GET request to /login from 10.0.0.5
+INFO 2026-02-04 15:42:19 User 'admin' logged in from 192.168.1.10
+INFO 2026-02-04 15:42:23 Resource accessed /login by admin
+INFO 2026-02-04 15:42:27 GET request to /dashboard from 172.16.0.12
+INFO 2026-02-04 15:42:31 User 'root' logged in from 192.168.1.10
+INFO 2026-02-04 15:42:35 POST request to /dashboard from 172.16.0.12
+INFO 2026-02-04 15:42:39 User 'guest' logged in from 10.0.0.5
+INFO 2026-02-04 15:42:43 POST request to /api/data from 192.168.1.10
+INFO 2026-02-04 15:42:47 User 'admin' logged in from 10.0.0.5
+INFO 2026-02-04 15:42:51 GET request to /api/data from 172.16.0.12
+INFO 2026-02-04 15:42:55 POST request to / from 192.168.1.10
+WARNING 2026-02-04 15:42:59 Failed password for invalid user admin from 45.33.32.156
+INFO 2026-02-04 15:43:03 POST request to /api/data from 10.0.0.5
+INFO 2026-02-04 15:43:07 Resource accessed /admin by root
+INFO 2026-02-04 15:43:11 Resource accessed /dashboard by alice
+INFO 2026-02-04 15:43:15 Resource accessed /api/data by john
+CRITICAL 2026-02-04 15:43:19 Possible SQL injection attempt detected from 185.220.101.45
+INFO 2026-02-04 15:43:23 POST request to / from 192.168.1.10
+INFO 2026-02-04 15:43:27 Resource accessed /login by alice
+INFO 2026-02-04 15:43:31 POST request to /api/data from 10.0.0.5
+ERROR 2026-02-04 15:43:35 Authentication failure for guest from 185.220.101.45
+INFO 2026-02-04 15:43:39 POST request to /api/data from 172.16.0.12
+ERROR 2026-02-04 15:43:43 Authentication failure for john from 103.21.244.0
+INFO 2026-02-04 15:43:47 Resource accessed /admin by admin
+INFO 2026-02-04 15:43:51 GET request to /dashboard from 192.168.1.10
+INFO 2026-02-04 15:43:55 POST request to /admin from 192.168.1.10
+INFO 2026-02-04 15:43:59 Resource accessed /login by admin
+INFO 2026-02-04 15:44:03 Resource accessed /api/data by guest
+INFO 2026-02-04 15:44:07 Resource accessed /login by john
+INFO 2026-02-04 15:44:11 Resource accessed /api/data by john
+INFO 2026-02-04 15:44:15 User 'root' logged in from 192.168.1.10
+INFO 2026-02-04 15:44:19 Resource accessed /dashboard by alice
+INFO 2026-02-04 15:44:23 Resource accessed /admin by john
+INFO 2026-02-04 15:44:27 Resource accessed /api/data by admin
+WARNING 2026-02-04 15:44:31 Failed password for invalid user root from 103.21.244.0
+INFO 2026-02-04 15:44:35 Resource accessed /dashboard by guest
+INFO 2026-02-04 15:44:39 Resource accessed / by guest
+CRITICAL 2026-02-04 15:44:43 Possible SQL injection attempt detected from 185.220.101.45
+INFO 2026-02-04 15:44:47 Resource accessed /admin by root
+CRITICAL 2026-02-04 15:44:51 Possible SQL injection attempt detected from 185.220.101.45
+INFO 2026-02-04 15:44:55 Resource accessed /login by john
+INFO 2026-02-04 15:44:59 Resource accessed /dashboard by john
+INFO 2026-02-04 15:45:03 POST request to / from 10.0.0.5
+INFO 2026-02-04 15:45:07 User 'alice' logged in from 10.0.0.5
+INFO 2026-02-04 15:45:11 GET request to /api/data from 192.168.1.10
+INFO 2026-02-04 15:45:15 Resource accessed /api/data by admin
+INFO 2026-02-04 15:45:19 Resource accessed /api/data by john
+INFO 2026-02-04 15:45:23 Resource accessed /api/data by guest
+ALERT 2026-02-04 15:45:27 Unauthorized access attempt to /admin from 45.33.32.156
+WARNING 2026-02-04 15:45:31 Failed password for invalid user guest from 185.220.101.45
+ALERT 2026-02-04 15:45:35 Unauthorized access attempt to /admin from 45.33.32.156
+INFO 2026-02-04 15:45:39 Resource accessed /dashboard by alice
+INFO 2026-02-04 15:45:43 Resource accessed /api/data by john
+ALERT 2026-02-04 15:45:47 Unauthorized access attempt to /admin from 185.220.101.45
+INFO 2026-02-04 15:45:51 User 'guest' logged in from 10.0.0.5
+INFO 2026-02-04 15:45:55 User 'john' logged in from 10.0.0.5
+WARNING 2026-02-04 15:45:59 Directory traversal attempt ../ from 45.33.32.156
+INFO 2026-02-04 15:46:03 GET request to / from 172.16.0.12
+INFO 2026-02-04 15:46:07 User 'guest' logged in from 172.16.0.12
+INFO 2026-02-04 15:46:11 Resource accessed /login by guest
+INFO 2026-02-04 15:46:15 User 'alice' logged in from 192.168.1.10
+INFO 2026-02-04 15:46:19 User 'alice' logged in from 172.16.0.12
+INFO 2026-02-04 15:46:23 POST request to /login from 172.16.0.12
+INFO 2026-02-04 15:46:27 User 'john' logged in from 10.0.0.5
+INFO 2026-02-04 15:46:31 Resource accessed /dashboard by guest
+INFO 2026-02-04 15:46:35 User 'alice' logged in from 172.16.0.12
+INFO 2026-02-04 15:46:39 User 'guest' logged in from 192.168.1.10
+INFO 2026-02-04 15:46:43 User 'admin' logged in from 172.16.0.12
+INFO 2026-02-04 15:46:47 GET request to /dashboard from 10.0.0.5
+INFO 2026-02-04 15:46:51 User 'admin' logged in from 172.16.0.12
+INFO 2026-02-04 15:46:55 POST request to /dashboard from 192.168.1.10
+INFO 2026-02-04 15:46:59 User 'guest' logged in from 192.168.1.10
+INFO 2026-02-04 15:47:03 Resource accessed /login by guest
+INFO 2026-02-04 15:47:07 Resource accessed / by guest
+INFO 2026-02-04 15:47:11 Resource accessed / by john
+INFO 2026-02-04 15:47:15 Resource accessed / by root
+INFO 2026-02-04 15:47:19 Resource accessed /admin by alice
+INFO 2026-02-04 15:47:23 Resource accessed /api/data by alice
+CRITICAL 2026-02-04 15:47:27 Possible SQL injection attempt detected from 45.33.32.156
+CRITICAL 2026-02-04 15:47:31 Possible SQL injection attempt detected from 103.21.244.0
+WARNING 2026-02-04 15:47:35 Directory traversal attempt ../ from 103.21.244.0
+INFO 2026-02-04 15:47:39 Resource accessed / by guest
+INFO 2026-02-04 15:47:43 Resource accessed / by guest
+INFO 2026-02-04 15:47:47 Resource accessed /api/data by john
+INFO 2026-02-04 15:47:51 User 'alice' logged in from 10.0.0.5
+INFO 2026-02-04 15:47:55 POST request to /dashboard from 10.0.0.5
+INFO 2026-02-04 15:47:59 POST request to /dashboard from 10.0.0.5
+INFO 2026-02-04 15:48:03 User 'guest' logged in from 172.16.0.12

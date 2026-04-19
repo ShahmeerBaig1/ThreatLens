@@ -1,0 +1,500 @@
+INFO 2026-04-20 02:24:26 User 'administrator' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:24:29 Resource accessed /wp-admin by john from 192.168.1.10
+INFO 2026-04-20 02:24:32 Resource accessed /api/data by administrator from 10.10.1.5
+ALERT 2026-04-20 02:24:35 Rate limit exceeded - too many requests from 198.199.88.1
+INFO 2026-04-20 02:24:38 Resource accessed /admin by ubuntu from 10.10.1.5
+INFO 2026-04-20 02:24:41 Resource accessed /wp-admin by john from 10.10.1.5
+ALERT 2026-04-20 02:24:44 Unauthorized access attempt to /admin from 198.199.88.1
+CRITICAL 2026-04-20 02:24:47 XSS attempt detected: <script>alert(1)</script> from 185.220.101.45
+CRITICAL 2026-04-20 02:24:50 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+ALERT 2026-04-20 02:24:53 Rate limit exceeded - too many requests from 45.33.32.156
+INFO 2026-04-20 02:24:56 POST /wp-admin 200 from 10.0.0.5
+ERROR 2026-04-20 02:24:59 sudo: root: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+INFO 2026-04-20 02:25:02 User 'guest' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:25:05 Resource accessed /.env by ubuntu from 10.0.0.5
+INFO 2026-04-20 02:25:08 User 'ubuntu' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:25:11 Session created for alice from 10.0.0.5
+ERROR 2026-04-20 02:25:14 sudo: ubuntu: command not allowed ; TTY=pts/0 ; from 45.33.32.156
+INFO 2026-04-20 02:25:17 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:25:20 Resource accessed /login by root from 192.168.1.10
+INFO 2026-04-20 02:25:23 Resource accessed / by john from 10.0.0.5
+CRITICAL 2026-04-20 02:25:26 XSS attempt detected: <script>alert(1)</script> from 198.199.88.1
+INFO 2026-04-20 02:25:29 User 'guest' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:25:32 User 'john' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:25:35 Resource accessed /login by john from 10.0.0.5
+CRITICAL 2026-04-20 02:25:38 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:25:41 POST /admin 200 from 10.10.1.5
+INFO 2026-04-20 02:25:44 Session created for administrator from 10.0.0.5
+INFO 2026-04-20 02:25:47 Session created for guest from 10.10.1.5
+CRITICAL 2026-04-20 02:25:50 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+INFO 2026-04-20 02:25:53 Resource accessed /dashboard by root from 172.16.0.12
+INFO 2026-04-20 02:25:56 Resource accessed / by admin from 10.10.1.5
+ERROR 2026-04-20 02:25:59 Authentication failure for guest from 198.199.88.1
+INFO 2026-04-20 02:26:02 User 'ubuntu' logged in successfully from 192.168.1.10
+ERROR 2026-04-20 02:26:05 sudo: ubuntu: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+WARNING 2026-04-20 02:26:08 Port scan detected from 185.220.101.45 on multiple ports
+INFO 2026-04-20 02:26:11 POST /wp-admin 200 from 10.0.0.5
+INFO 2026-04-20 02:26:14 Session created for ubuntu from 192.168.1.10
+WARNING 2026-04-20 02:26:17 Failed password for invalid user john from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:26:20 POST /wp-admin 200 from 192.168.1.10
+INFO 2026-04-20 02:26:23 Session created for administrator from 192.168.1.10
+INFO 2026-04-20 02:26:26 Resource accessed /login by admin from 10.10.1.5
+ALERT 2026-04-20 02:26:29 Rate limit exceeded - too many requests from 185.220.101.45
+WARNING 2026-04-20 02:26:32 Failed password for invalid user john from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:26:35 POST /dashboard 200 from 10.0.0.5
+WARNING 2026-04-20 02:26:38 Failed password for invalid user john from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:26:41 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:26:44 Session created for root from 172.16.0.12
+INFO 2026-04-20 02:26:47 Resource accessed /login by guest from 10.0.0.5
+INFO 2026-04-20 02:26:50 GET /api/data 200 from 172.16.0.12
+WARNING 2026-04-20 02:26:53 Failed password for invalid user alice from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:26:56 User 'guest' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:26:59 Session created for ubuntu from 10.10.1.5
+INFO 2026-04-20 02:27:02 User 'guest' logged in successfully from 10.10.1.5
+WARNING 2026-04-20 02:27:05 Failed password for invalid user root from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:27:08 User 'john' logged in successfully from 10.10.1.5
+WARNING 2026-04-20 02:27:11 Port scan detected from 103.21.244.0 on multiple ports
+INFO 2026-04-20 02:27:14 User 'john' logged in successfully from 10.10.1.5
+WARNING 2026-04-20 02:27:17 Failed password for invalid user john from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:27:20 Session created for guest from 192.168.1.10
+INFO 2026-04-20 02:27:23 GET /.env 200 from 172.16.0.12
+INFO 2026-04-20 02:27:26 Resource accessed /wp-admin by alice from 10.10.1.5
+INFO 2026-04-20 02:27:29 Resource accessed /login by ubuntu from 172.16.0.12
+INFO 2026-04-20 02:27:32 POST /dashboard 200 from 10.0.0.5
+INFO 2026-04-20 02:27:35 User 'john' logged in successfully from 10.10.1.5
+ALERT 2026-04-20 02:27:38 Rate limit exceeded - too many requests from 185.220.101.45
+INFO 2026-04-20 02:27:41 Resource accessed / by alice from 10.10.1.5
+INFO 2026-04-20 02:27:44 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:27:47 Resource accessed /login by john from 172.16.0.12
+INFO 2026-04-20 02:27:50 POST / 200 from 172.16.0.12
+INFO 2026-04-20 02:27:53 Session created for root from 192.168.1.10
+INFO 2026-04-20 02:27:56 Session created for admin from 10.0.0.5
+INFO 2026-04-20 02:27:59 Resource accessed /wp-admin by administrator from 172.16.0.12
+INFO 2026-04-20 02:28:02 PUT /wp-admin 200 from 172.16.0.12
+INFO 2026-04-20 02:28:05 POST /login 200 from 10.0.0.5
+ALERT 2026-04-20 02:28:08 Rate limit exceeded - too many requests from 103.21.244.0
+WARNING 2026-04-20 02:28:11 Failed password for invalid user root from 198.199.88.1 port 22 ssh2
+INFO 2026-04-20 02:28:14 PUT /dashboard 200 from 10.10.1.5
+INFO 2026-04-20 02:28:17 POST /admin 200 from 10.10.1.5
+INFO 2026-04-20 02:28:20 POST /login 200 from 172.16.0.12
+INFO 2026-04-20 02:28:23 POST /.env 200 from 192.168.1.10
+INFO 2026-04-20 02:28:26 PUT /admin 200 from 10.10.1.5
+INFO 2026-04-20 02:28:29 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:28:32 User 'guest' logged in successfully from 172.16.0.12
+ERROR 2026-04-20 02:28:35 403 Forbidden /admin from 198.199.88.1 - alice
+INFO 2026-04-20 02:28:38 Session created for admin from 10.10.1.5
+ERROR 2026-04-20 02:28:41 403 Forbidden /wp-admin from 103.21.244.0 - admin
+INFO 2026-04-20 02:28:44 GET /api/data 200 from 192.168.1.10
+ERROR 2026-04-20 02:28:47 Authentication failure for admin from 185.220.101.45
+INFO 2026-04-20 02:28:50 GET / 200 from 10.0.0.5
+ALERT 2026-04-20 02:28:53 Rate limit exceeded - too many requests from 103.21.244.0
+INFO 2026-04-20 02:28:56 PUT /.env 200 from 192.168.1.10
+INFO 2026-04-20 02:28:59 Resource accessed /admin by ubuntu from 172.16.0.12
+INFO 2026-04-20 02:29:02 POST /wp-admin 200 from 10.10.1.5
+INFO 2026-04-20 02:29:05 Session created for admin from 10.10.1.5
+INFO 2026-04-20 02:29:08 Session created for guest from 192.168.1.10
+WARNING 2026-04-20 02:29:11 Port scan detected from 45.33.32.156 on multiple ports
+INFO 2026-04-20 02:29:14 Session created for ubuntu from 172.16.0.12
+INFO 2026-04-20 02:29:17 GET /wp-admin 200 from 192.168.1.10
+INFO 2026-04-20 02:29:20 Session created for root from 10.10.1.5
+INFO 2026-04-20 02:29:23 PUT /wp-admin 200 from 10.0.0.5
+ALERT 2026-04-20 02:29:26 Unauthorized access attempt to /admin from 45.33.32.156
+INFO 2026-04-20 02:29:29 Resource accessed /api/data by alice from 192.168.1.10
+INFO 2026-04-20 02:29:32 Resource accessed /.env by alice from 172.16.0.12
+CRITICAL 2026-04-20 02:29:35 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:29:38 User 'alice' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:29:41 PUT /login 200 from 192.168.1.10
+WARNING 2026-04-20 02:29:44 Failed password for invalid user john from 45.33.32.156 port 22 ssh2
+INFO 2026-04-20 02:29:47 User 'ubuntu' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:29:50 Session created for root from 192.168.1.10
+INFO 2026-04-20 02:29:53 User 'guest' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:29:56 User 'alice' logged in successfully from 10.10.1.5
+ALERT 2026-04-20 02:29:59 Unauthorized access attempt to /admin from 198.199.88.1
+CRITICAL 2026-04-20 02:30:02 Possible SQL injection attempt detected: union select from 198.199.88.1
+INFO 2026-04-20 02:30:05 Session created for root from 192.168.1.10
+INFO 2026-04-20 02:30:08 Resource accessed /wp-admin by ubuntu from 172.16.0.12
+INFO 2026-04-20 02:30:11 Resource accessed /admin by admin from 192.168.1.10
+INFO 2026-04-20 02:30:14 Resource accessed /api/data by ubuntu from 172.16.0.12
+ERROR 2026-04-20 02:30:17 sudo: alice: command not allowed ; TTY=pts/0 ; from 103.21.244.0
+INFO 2026-04-20 02:30:20 Resource accessed /.env by root from 10.10.1.5
+INFO 2026-04-20 02:30:23 Session created for admin from 192.168.1.10
+INFO 2026-04-20 02:30:26 Resource accessed /login by alice from 192.168.1.10
+INFO 2026-04-20 02:30:29 User 'root' logged in successfully from 172.16.0.12
+ALERT 2026-04-20 02:30:32 Rate limit exceeded - too many requests from 103.21.244.0
+CRITICAL 2026-04-20 02:30:35 XSS attempt detected: <script>alert(1)</script> from 45.33.32.156
+INFO 2026-04-20 02:30:38 Resource accessed /dashboard by alice from 192.168.1.10
+INFO 2026-04-20 02:30:41 Resource accessed /wp-admin by john from 172.16.0.12
+INFO 2026-04-20 02:30:44 POST /wp-admin 200 from 172.16.0.12
+INFO 2026-04-20 02:30:47 Resource accessed /api/data by administrator from 10.0.0.5
+ALERT 2026-04-20 02:30:50 Unauthorized access attempt to /admin from 185.220.101.45
+INFO 2026-04-20 02:30:53 Session created for root from 10.0.0.5
+INFO 2026-04-20 02:30:56 Session created for root from 10.10.1.5
+INFO 2026-04-20 02:30:59 User 'administrator' logged in successfully from 192.168.1.10
+WARNING 2026-04-20 02:31:02 Failed password for invalid user admin from 198.199.88.1 port 22 ssh2
+CRITICAL 2026-04-20 02:31:05 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+ALERT 2026-04-20 02:31:08 Unauthorized access attempt to /admin from 198.199.88.1
+WARNING 2026-04-20 02:31:11 Directory traversal attempt ../../etc/passwd from 185.220.101.45
+INFO 2026-04-20 02:31:14 Resource accessed /dashboard by admin from 192.168.1.10
+INFO 2026-04-20 02:31:17 Session created for admin from 172.16.0.12
+WARNING 2026-04-20 02:31:20 Failed password for invalid user guest from 45.33.32.156 port 22 ssh2
+INFO 2026-04-20 02:31:23 User 'john' logged in successfully from 172.16.0.12
+ERROR 2026-04-20 02:31:26 Authentication failure for alice from 185.220.101.45
+INFO 2026-04-20 02:31:29 Resource accessed /.env by guest from 172.16.0.12
+CRITICAL 2026-04-20 02:31:32 Possible SQL injection attempt detected: union select from 198.199.88.1
+CRITICAL 2026-04-20 02:31:35 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+INFO 2026-04-20 02:31:38 Resource accessed /wp-admin by admin from 172.16.0.12
+INFO 2026-04-20 02:31:41 PUT /dashboard 200 from 10.0.0.5
+WARNING 2026-04-20 02:31:44 Port scan detected from 45.33.32.156 on multiple ports
+ERROR 2026-04-20 02:31:47 sudo: alice: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+WARNING 2026-04-20 02:31:50 Failed password for invalid user guest from 198.199.88.1 port 22 ssh2
+INFO 2026-04-20 02:31:53 Session created for ubuntu from 172.16.0.12
+INFO 2026-04-20 02:31:56 User 'admin' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:31:59 Session created for administrator from 10.0.0.5
+INFO 2026-04-20 02:32:02 GET /wp-admin 200 from 10.10.1.5
+WARNING 2026-04-20 02:32:05 Port scan detected from 185.220.101.45 on multiple ports
+INFO 2026-04-20 02:32:08 Session created for alice from 192.168.1.10
+CRITICAL 2026-04-20 02:32:11 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:32:14 POST /login 200 from 10.0.0.5
+ERROR 2026-04-20 02:32:17 403 Forbidden /admin from 103.21.244.0 - ubuntu
+INFO 2026-04-20 02:32:20 GET /api/data 200 from 10.10.1.5
+INFO 2026-04-20 02:32:23 GET /wp-admin 200 from 172.16.0.12
+INFO 2026-04-20 02:32:26 GET /.env 200 from 192.168.1.10
+INFO 2026-04-20 02:32:29 User 'root' logged in successfully from 10.10.1.5
+ERROR 2026-04-20 02:32:32 403 Forbidden /admin from 198.199.88.1 - administrator
+INFO 2026-04-20 02:32:35 PUT /api/data 200 from 10.0.0.5
+CRITICAL 2026-04-20 02:32:38 Possible SQL injection attempt detected: union select from 185.220.101.45
+WARNING 2026-04-20 02:32:41 Directory traversal attempt ../../etc/passwd from 185.220.101.45
+INFO 2026-04-20 02:32:44 Resource accessed /admin by ubuntu from 10.0.0.5
+ALERT 2026-04-20 02:32:47 Rate limit exceeded - too many requests from 103.21.244.0
+INFO 2026-04-20 02:32:50 Session created for john from 10.10.1.5
+WARNING 2026-04-20 02:32:53 Port scan detected from 45.33.32.156 on multiple ports
+ERROR 2026-04-20 02:32:56 403 Forbidden /.env from 198.199.88.1 - administrator
+WARNING 2026-04-20 02:32:59 Port scan detected from 198.199.88.1 on multiple ports
+WARNING 2026-04-20 02:33:02 Directory traversal attempt ../../etc/passwd from 45.33.32.156
+ERROR 2026-04-20 02:33:05 Authentication failure for ubuntu from 45.33.32.156
+INFO 2026-04-20 02:33:08 User 'john' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:33:11 Resource accessed /wp-admin by john from 10.10.1.5
+INFO 2026-04-20 02:33:14 POST /login 200 from 10.10.1.5
+INFO 2026-04-20 02:33:17 PUT /dashboard 200 from 10.0.0.5
+INFO 2026-04-20 02:33:20 Resource accessed /api/data by guest from 192.168.1.10
+INFO 2026-04-20 02:33:23 User 'admin' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:33:26 Session created for ubuntu from 10.0.0.5
+INFO 2026-04-20 02:33:29 User 'admin' logged in successfully from 10.0.0.5
+ALERT 2026-04-20 02:33:32 Rate limit exceeded - too many requests from 185.220.101.45
+INFO 2026-04-20 02:33:35 Resource accessed /api/data by john from 172.16.0.12
+INFO 2026-04-20 02:33:38 GET /wp-admin 200 from 192.168.1.10
+INFO 2026-04-20 02:33:41 Resource accessed /api/data by guest from 10.10.1.5
+INFO 2026-04-20 02:33:44 Session created for admin from 10.0.0.5
+ALERT 2026-04-20 02:33:47 Rate limit exceeded - too many requests from 198.199.88.1
+INFO 2026-04-20 02:33:50 User 'guest' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:33:53 Resource accessed /admin by admin from 172.16.0.12
+WARNING 2026-04-20 02:33:56 Port scan detected from 185.220.101.45 on multiple ports
+INFO 2026-04-20 02:33:59 Session created for ubuntu from 10.10.1.5
+INFO 2026-04-20 02:34:02 Resource accessed /.env by guest from 10.0.0.5
+INFO 2026-04-20 02:34:05 Resource accessed /.env by administrator from 172.16.0.12
+INFO 2026-04-20 02:34:08 GET /wp-admin 200 from 10.10.1.5
+INFO 2026-04-20 02:34:11 Session created for ubuntu from 10.0.0.5
+INFO 2026-04-20 02:34:14 User 'admin' logged in successfully from 10.0.0.5
+ERROR 2026-04-20 02:34:17 Authentication failure for root from 185.220.101.45
+INFO 2026-04-20 02:34:20 Session created for john from 192.168.1.10
+CRITICAL 2026-04-20 02:34:23 XSS attempt detected: <script>alert(1)</script> from 198.199.88.1
+WARNING 2026-04-20 02:34:26 Port scan detected from 45.33.32.156 on multiple ports
+CRITICAL 2026-04-20 02:34:29 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+INFO 2026-04-20 02:34:32 User 'admin' logged in successfully from 10.10.1.5
+WARNING 2026-04-20 02:34:35 Directory traversal attempt ../../etc/passwd from 45.33.32.156
+INFO 2026-04-20 02:34:38 User 'administrator' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:34:41 User 'ubuntu' logged in successfully from 10.10.1.5
+WARNING 2026-04-20 02:34:44 Failed password for invalid user guest from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:34:47 PUT /admin 200 from 10.0.0.5
+CRITICAL 2026-04-20 02:34:50 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:34:53 Resource accessed /api/data by john from 10.10.1.5
+WARNING 2026-04-20 02:34:56 Directory traversal attempt ../../etc/passwd from 198.199.88.1
+WARNING 2026-04-20 02:34:59 Failed password for invalid user guest from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:35:02 GET / 200 from 10.0.0.5
+ALERT 2026-04-20 02:35:05 Rate limit exceeded - too many requests from 185.220.101.45
+INFO 2026-04-20 02:35:08 Resource accessed /.env by alice from 172.16.0.12
+INFO 2026-04-20 02:35:11 Resource accessed /dashboard by guest from 172.16.0.12
+INFO 2026-04-20 02:35:14 Resource accessed / by ubuntu from 10.0.0.5
+INFO 2026-04-20 02:35:17 Resource accessed /admin by administrator from 10.10.1.5
+INFO 2026-04-20 02:35:20 User 'admin' logged in successfully from 10.10.1.5
+ALERT 2026-04-20 02:35:23 Unauthorized access attempt to /admin from 45.33.32.156
+ERROR 2026-04-20 02:35:26 Authentication failure for alice from 45.33.32.156
+ALERT 2026-04-20 02:35:29 Unauthorized access attempt to /admin from 198.199.88.1
+INFO 2026-04-20 02:35:32 Resource accessed /.env by admin from 192.168.1.10
+INFO 2026-04-20 02:35:35 Resource accessed / by ubuntu from 192.168.1.10
+INFO 2026-04-20 02:35:38 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:35:41 GET /.env 200 from 10.0.0.5
+INFO 2026-04-20 02:35:44 PUT / 200 from 10.10.1.5
+WARNING 2026-04-20 02:35:47 Failed password for invalid user ubuntu from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:35:50 Session created for admin from 172.16.0.12
+INFO 2026-04-20 02:35:53 User 'john' logged in successfully from 192.168.1.10
+ERROR 2026-04-20 02:35:56 403 Forbidden /api/data from 198.199.88.1 - alice
+INFO 2026-04-20 02:35:59 Resource accessed /api/data by john from 10.10.1.5
+INFO 2026-04-20 02:36:02 Resource accessed /api/data by ubuntu from 10.0.0.5
+INFO 2026-04-20 02:36:05 Session created for administrator from 10.0.0.5
+INFO 2026-04-20 02:36:08 GET / 200 from 10.10.1.5
+INFO 2026-04-20 02:36:11 GET /admin 200 from 172.16.0.12
+INFO 2026-04-20 02:36:14 Resource accessed /admin by ubuntu from 10.0.0.5
+CRITICAL 2026-04-20 02:36:17 XSS attempt detected: <script>alert(1)</script> from 45.33.32.156
+CRITICAL 2026-04-20 02:36:20 Possible SQL injection attempt detected: union select from 198.199.88.1
+ALERT 2026-04-20 02:36:23 Unauthorized access attempt to /admin from 185.220.101.45
+INFO 2026-04-20 02:36:26 Resource accessed / by john from 192.168.1.10
+INFO 2026-04-20 02:36:29 User 'administrator' logged in successfully from 192.168.1.10
+CRITICAL 2026-04-20 02:36:32 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+INFO 2026-04-20 02:36:35 Resource accessed / by john from 10.10.1.5
+ALERT 2026-04-20 02:36:38 Rate limit exceeded - too many requests from 45.33.32.156
+INFO 2026-04-20 02:36:41 User 'john' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:36:44 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:36:47 Session created for guest from 10.0.0.5
+ERROR 2026-04-20 02:36:50 Authentication failure for john from 185.220.101.45
+INFO 2026-04-20 02:36:53 PUT /dashboard 200 from 10.0.0.5
+INFO 2026-04-20 02:36:56 User 'guest' logged in successfully from 192.168.1.10
+ERROR 2026-04-20 02:36:59 403 Forbidden / from 198.199.88.1 - root
+ALERT 2026-04-20 02:37:02 Rate limit exceeded - too many requests from 45.33.32.156
+INFO 2026-04-20 02:37:05 User 'ubuntu' logged in successfully from 192.168.1.10
+WARNING 2026-04-20 02:37:08 Port scan detected from 185.220.101.45 on multiple ports
+WARNING 2026-04-20 02:37:11 Directory traversal attempt ../../etc/passwd from 45.33.32.156
+WARNING 2026-04-20 02:37:14 Failed password for invalid user alice from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:37:17 Resource accessed /dashboard by john from 10.10.1.5
+INFO 2026-04-20 02:37:20 POST /dashboard 200 from 172.16.0.12
+INFO 2026-04-20 02:37:23 POST /api/data 200 from 192.168.1.10
+INFO 2026-04-20 02:37:26 POST /.env 200 from 172.16.0.12
+INFO 2026-04-20 02:37:29 Resource accessed /admin by john from 172.16.0.12
+INFO 2026-04-20 02:37:32 User 'root' logged in successfully from 10.0.0.5
+ALERT 2026-04-20 02:37:35 Unauthorized access attempt to /admin from 45.33.32.156
+ERROR 2026-04-20 02:37:38 sudo: guest: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+INFO 2026-04-20 02:37:41 User 'ubuntu' logged in successfully from 10.0.0.5
+INFO 2026-04-20 02:37:44 POST /wp-admin 200 from 10.0.0.5
+INFO 2026-04-20 02:37:47 Session created for root from 10.10.1.5
+INFO 2026-04-20 02:37:50 Session created for administrator from 10.0.0.5
+ERROR 2026-04-20 02:37:53 sudo: alice: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+INFO 2026-04-20 02:37:56 User 'admin' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:37:59 PUT /login 200 from 172.16.0.12
+INFO 2026-04-20 02:38:02 User 'admin' logged in successfully from 10.10.1.5
+ERROR 2026-04-20 02:38:05 403 Forbidden /login from 103.21.244.0 - guest
+ALERT 2026-04-20 02:38:08 Rate limit exceeded - too many requests from 198.199.88.1
+INFO 2026-04-20 02:38:11 POST /login 200 from 172.16.0.12
+INFO 2026-04-20 02:38:14 POST /dashboard 200 from 192.168.1.10
+INFO 2026-04-20 02:38:17 GET /login 200 from 10.0.0.5
+INFO 2026-04-20 02:38:20 Session created for guest from 10.10.1.5
+INFO 2026-04-20 02:38:23 Resource accessed /dashboard by root from 10.0.0.5
+INFO 2026-04-20 02:38:26 User 'ubuntu' logged in successfully from 10.0.0.5
+ALERT 2026-04-20 02:38:29 Rate limit exceeded - too many requests from 185.220.101.45
+ERROR 2026-04-20 02:38:32 Authentication failure for alice from 103.21.244.0
+ERROR 2026-04-20 02:38:35 Authentication failure for admin from 185.220.101.45
+WARNING 2026-04-20 02:38:38 Port scan detected from 45.33.32.156 on multiple ports
+ERROR 2026-04-20 02:38:41 Authentication failure for alice from 198.199.88.1
+WARNING 2026-04-20 02:38:44 Failed password for invalid user ubuntu from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:38:47 Resource accessed /dashboard by alice from 172.16.0.12
+CRITICAL 2026-04-20 02:38:50 XSS attempt detected: <script>alert(1)</script> from 198.199.88.1
+INFO 2026-04-20 02:38:53 Session created for john from 172.16.0.12
+INFO 2026-04-20 02:38:56 PUT / 200 from 192.168.1.10
+INFO 2026-04-20 02:38:59 User 'ubuntu' logged in successfully from 192.168.1.10
+ERROR 2026-04-20 02:39:02 Authentication failure for alice from 45.33.32.156
+INFO 2026-04-20 02:39:05 Session created for alice from 172.16.0.12
+WARNING 2026-04-20 02:39:08 Failed password for invalid user administrator from 45.33.32.156 port 22 ssh2
+WARNING 2026-04-20 02:39:11 Failed password for invalid user ubuntu from 45.33.32.156 port 22 ssh2
+INFO 2026-04-20 02:39:14 User 'admin' logged in successfully from 10.10.1.5
+ALERT 2026-04-20 02:39:17 Rate limit exceeded - too many requests from 45.33.32.156
+INFO 2026-04-20 02:39:20 Resource accessed /admin by admin from 10.10.1.5
+INFO 2026-04-20 02:39:23 User 'guest' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:39:26 Resource accessed /admin by root from 192.168.1.10
+INFO 2026-04-20 02:39:29 Resource accessed /admin by alice from 10.0.0.5
+INFO 2026-04-20 02:39:32 GET /login 200 from 172.16.0.12
+ERROR 2026-04-20 02:39:35 403 Forbidden / from 45.33.32.156 - guest
+WARNING 2026-04-20 02:39:38 Directory traversal attempt ../../etc/passwd from 45.33.32.156
+INFO 2026-04-20 02:39:41 Resource accessed /api/data by alice from 10.10.1.5
+INFO 2026-04-20 02:39:44 POST /.env 200 from 172.16.0.12
+WARNING 2026-04-20 02:39:47 Directory traversal attempt ../../etc/passwd from 185.220.101.45
+CRITICAL 2026-04-20 02:39:50 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+WARNING 2026-04-20 02:39:53 Directory traversal attempt ../../etc/passwd from 185.220.101.45
+INFO 2026-04-20 02:39:56 Resource accessed /api/data by guest from 172.16.0.12
+INFO 2026-04-20 02:39:59 User 'root' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:40:02 Session created for guest from 10.10.1.5
+INFO 2026-04-20 02:40:05 Session created for admin from 10.10.1.5
+INFO 2026-04-20 02:40:08 Session created for alice from 10.10.1.5
+ALERT 2026-04-20 02:40:11 Rate limit exceeded - too many requests from 185.220.101.45
+INFO 2026-04-20 02:40:14 Resource accessed / by admin from 10.0.0.5
+WARNING 2026-04-20 02:40:17 Failed password for invalid user admin from 185.220.101.45 port 22 ssh2
+ERROR 2026-04-20 02:40:20 403 Forbidden /admin from 45.33.32.156 - administrator
+INFO 2026-04-20 02:40:23 User 'administrator' logged in successfully from 10.0.0.5
+CRITICAL 2026-04-20 02:40:26 XSS attempt detected: <script>alert(1)</script> from 185.220.101.45
+INFO 2026-04-20 02:40:29 GET /admin 200 from 10.10.1.5
+INFO 2026-04-20 02:40:32 User 'guest' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:40:35 PUT /.env 200 from 192.168.1.10
+INFO 2026-04-20 02:40:38 Session created for john from 10.0.0.5
+INFO 2026-04-20 02:40:41 User 'root' logged in successfully from 172.16.0.12
+ALERT 2026-04-20 02:40:44 Unauthorized access attempt to /admin from 198.199.88.1
+INFO 2026-04-20 02:40:47 GET /admin 200 from 172.16.0.12
+INFO 2026-04-20 02:40:50 PUT /dashboard 200 from 10.0.0.5
+INFO 2026-04-20 02:40:53 Session created for guest from 192.168.1.10
+ERROR 2026-04-20 02:40:56 403 Forbidden /wp-admin from 45.33.32.156 - ubuntu
+WARNING 2026-04-20 02:40:59 Port scan detected from 103.21.244.0 on multiple ports
+INFO 2026-04-20 02:41:02 Session created for ubuntu from 172.16.0.12
+CRITICAL 2026-04-20 02:41:05 XSS attempt detected: <script>alert(1)</script> from 45.33.32.156
+INFO 2026-04-20 02:41:08 Resource accessed /.env by guest from 10.0.0.5
+INFO 2026-04-20 02:41:11 User 'guest' logged in successfully from 192.168.1.10
+ALERT 2026-04-20 02:41:14 Rate limit exceeded - too many requests from 45.33.32.156
+INFO 2026-04-20 02:41:17 User 'guest' logged in successfully from 10.0.0.5
+INFO 2026-04-20 02:41:20 Resource accessed /login by ubuntu from 10.10.1.5
+ERROR 2026-04-20 02:41:23 Authentication failure for administrator from 103.21.244.0
+ERROR 2026-04-20 02:41:26 sudo: guest: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+CRITICAL 2026-04-20 02:41:29 Possible SQL injection attempt detected: union select from 103.21.244.0
+ERROR 2026-04-20 02:41:32 403 Forbidden /api/data from 198.199.88.1 - john
+WARNING 2026-04-20 02:41:35 Port scan detected from 45.33.32.156 on multiple ports
+INFO 2026-04-20 02:41:38 Session created for john from 10.0.0.5
+WARNING 2026-04-20 02:41:41 Failed password for invalid user root from 198.199.88.1 port 22 ssh2
+INFO 2026-04-20 02:41:44 Session created for john from 192.168.1.10
+INFO 2026-04-20 02:41:47 User 'ubuntu' logged in successfully from 192.168.1.10
+ERROR 2026-04-20 02:41:50 sudo: administrator: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+CRITICAL 2026-04-20 02:41:53 Possible SQL injection attempt detected: union select from 185.220.101.45
+ALERT 2026-04-20 02:41:56 Unauthorized access attempt to /admin from 185.220.101.45
+CRITICAL 2026-04-20 02:41:59 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:42:02 Resource accessed /admin by admin from 192.168.1.10
+WARNING 2026-04-20 02:42:05 Failed password for invalid user john from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:42:08 Resource accessed /dashboard by admin from 172.16.0.12
+INFO 2026-04-20 02:42:11 User 'admin' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:42:14 User 'guest' logged in successfully from 172.16.0.12
+WARNING 2026-04-20 02:42:17 Failed password for invalid user admin from 185.220.101.45 port 22 ssh2
+INFO 2026-04-20 02:42:20 Session created for administrator from 172.16.0.12
+INFO 2026-04-20 02:42:23 User 'root' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:42:26 Session created for john from 192.168.1.10
+ERROR 2026-04-20 02:42:29 403 Forbidden /admin from 198.199.88.1 - admin
+INFO 2026-04-20 02:42:32 Resource accessed / by root from 10.10.1.5
+ALERT 2026-04-20 02:42:35 Rate limit exceeded - too many requests from 103.21.244.0
+CRITICAL 2026-04-20 02:42:38 Possible SQL injection attempt detected: union select from 185.220.101.45
+ERROR 2026-04-20 02:42:41 Authentication failure for guest from 198.199.88.1
+INFO 2026-04-20 02:42:44 Resource accessed /api/data by alice from 10.0.0.5
+INFO 2026-04-20 02:42:47 Session created for ubuntu from 10.0.0.5
+INFO 2026-04-20 02:42:50 Resource accessed /.env by admin from 172.16.0.12
+CRITICAL 2026-04-20 02:42:53 Possible SQL injection attempt detected: union select from 185.220.101.45
+CRITICAL 2026-04-20 02:42:56 Possible SQL injection attempt detected: union select from 185.220.101.45
+ERROR 2026-04-20 02:42:59 403 Forbidden / from 103.21.244.0 - guest
+ALERT 2026-04-20 02:43:02 Rate limit exceeded - too many requests from 198.199.88.1
+INFO 2026-04-20 02:43:05 Session created for john from 10.0.0.5
+WARNING 2026-04-20 02:43:08 Port scan detected from 198.199.88.1 on multiple ports
+INFO 2026-04-20 02:43:11 User 'root' logged in successfully from 10.10.1.5
+ERROR 2026-04-20 02:43:14 403 Forbidden /login from 103.21.244.0 - ubuntu
+ALERT 2026-04-20 02:43:17 Rate limit exceeded - too many requests from 198.199.88.1
+WARNING 2026-04-20 02:43:20 Failed password for invalid user root from 198.199.88.1 port 22 ssh2
+ERROR 2026-04-20 02:43:23 sudo: administrator: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+INFO 2026-04-20 02:43:26 POST /api/data 200 from 172.16.0.12
+INFO 2026-04-20 02:43:29 Resource accessed /admin by ubuntu from 10.10.1.5
+WARNING 2026-04-20 02:43:32 Failed password for invalid user admin from 198.199.88.1 port 22 ssh2
+INFO 2026-04-20 02:43:35 POST /admin 200 from 10.0.0.5
+WARNING 2026-04-20 02:43:38 Failed password for invalid user admin from 185.220.101.45 port 22 ssh2
+WARNING 2026-04-20 02:43:41 Directory traversal attempt ../../etc/passwd from 103.21.244.0
+INFO 2026-04-20 02:43:44 Resource accessed /.env by administrator from 192.168.1.10
+INFO 2026-04-20 02:43:47 POST /admin 200 from 10.10.1.5
+INFO 2026-04-20 02:43:50 GET /wp-admin 200 from 10.0.0.5
+ERROR 2026-04-20 02:43:53 Authentication failure for administrator from 45.33.32.156
+INFO 2026-04-20 02:43:56 Resource accessed / by root from 10.10.1.5
+INFO 2026-04-20 02:43:59 Resource accessed /login by admin from 10.0.0.5
+INFO 2026-04-20 02:44:02 PUT / 200 from 10.0.0.5
+INFO 2026-04-20 02:44:05 POST /wp-admin 200 from 172.16.0.12
+INFO 2026-04-20 02:44:08 User 'alice' logged in successfully from 10.0.0.5
+ALERT 2026-04-20 02:44:11 Rate limit exceeded - too many requests from 185.220.101.45
+INFO 2026-04-20 02:44:14 Session created for alice from 10.0.0.5
+ERROR 2026-04-20 02:44:17 Authentication failure for guest from 45.33.32.156
+INFO 2026-04-20 02:44:20 Session created for guest from 10.10.1.5
+INFO 2026-04-20 02:44:23 Resource accessed /login by ubuntu from 10.0.0.5
+CRITICAL 2026-04-20 02:44:26 XSS attempt detected: <script>alert(1)</script> from 198.199.88.1
+INFO 2026-04-20 02:44:29 User 'guest' logged in successfully from 172.16.0.12
+ALERT 2026-04-20 02:44:32 Unauthorized access attempt to /admin from 185.220.101.45
+INFO 2026-04-20 02:44:35 Session created for guest from 172.16.0.12
+INFO 2026-04-20 02:44:38 Resource accessed /.env by guest from 10.10.1.5
+INFO 2026-04-20 02:44:41 GET /admin 200 from 192.168.1.10
+CRITICAL 2026-04-20 02:44:44 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:44:47 Session created for root from 192.168.1.10
+INFO 2026-04-20 02:44:50 Resource accessed /wp-admin by administrator from 10.10.1.5
+INFO 2026-04-20 02:44:53 PUT /login 200 from 10.10.1.5
+ALERT 2026-04-20 02:44:56 Rate limit exceeded - too many requests from 198.199.88.1
+INFO 2026-04-20 02:44:59 Session created for john from 10.10.1.5
+CRITICAL 2026-04-20 02:45:02 Possible SQL injection attempt detected: union select from 103.21.244.0
+INFO 2026-04-20 02:45:05 Session created for alice from 10.0.0.5
+INFO 2026-04-20 02:45:08 Resource accessed /login by alice from 10.0.0.5
+INFO 2026-04-20 02:45:11 Session created for ubuntu from 192.168.1.10
+INFO 2026-04-20 02:45:14 Resource accessed /admin by administrator from 172.16.0.12
+ALERT 2026-04-20 02:45:17 Unauthorized access attempt to /admin from 103.21.244.0
+ALERT 2026-04-20 02:45:20 Unauthorized access attempt to /admin from 103.21.244.0
+INFO 2026-04-20 02:45:23 PUT /api/data 200 from 10.0.0.5
+INFO 2026-04-20 02:45:26 Session created for administrator from 172.16.0.12
+INFO 2026-04-20 02:45:29 PUT /.env 200 from 10.0.0.5
+INFO 2026-04-20 02:45:32 User 'ubuntu' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:45:35 User 'root' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:45:38 Session created for root from 172.16.0.12
+INFO 2026-04-20 02:45:41 GET /dashboard 200 from 172.16.0.12
+INFO 2026-04-20 02:45:44 Resource accessed / by guest from 10.10.1.5
+INFO 2026-04-20 02:45:47 POST /admin 200 from 192.168.1.10
+INFO 2026-04-20 02:45:50 Resource accessed /wp-admin by guest from 172.16.0.12
+INFO 2026-04-20 02:45:53 Resource accessed / by john from 10.10.1.5
+CRITICAL 2026-04-20 02:45:56 Possible SQL injection attempt detected: union select from 185.220.101.45
+INFO 2026-04-20 02:45:59 User 'root' logged in successfully from 10.0.0.5
+INFO 2026-04-20 02:46:02 Session created for root from 10.10.1.5
+CRITICAL 2026-04-20 02:46:05 Possible SQL injection attempt detected: union select from 185.220.101.45
+ERROR 2026-04-20 02:46:08 sudo: administrator: command not allowed ; TTY=pts/0 ; from 198.199.88.1
+INFO 2026-04-20 02:46:11 User 'admin' logged in successfully from 10.0.0.5
+INFO 2026-04-20 02:46:14 User 'alice' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:46:17 Session created for administrator from 10.0.0.5
+INFO 2026-04-20 02:46:20 User 'alice' logged in successfully from 192.168.1.10
+ERROR 2026-04-20 02:46:23 Authentication failure for guest from 198.199.88.1
+ERROR 2026-04-20 02:46:26 sudo: admin: command not allowed ; TTY=pts/0 ; from 185.220.101.45
+ERROR 2026-04-20 02:46:29 Authentication failure for root from 45.33.32.156
+INFO 2026-04-20 02:46:32 User 'guest' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:46:35 User 'alice' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:46:38 User 'john' logged in successfully from 192.168.1.10
+WARNING 2026-04-20 02:46:41 Port scan detected from 185.220.101.45 on multiple ports
+INFO 2026-04-20 02:46:44 GET /admin 200 from 10.0.0.5
+INFO 2026-04-20 02:46:47 User 'root' logged in successfully from 172.16.0.12
+WARNING 2026-04-20 02:46:50 Directory traversal attempt ../../etc/passwd from 185.220.101.45
+INFO 2026-04-20 02:46:53 Resource accessed /dashboard by alice from 172.16.0.12
+INFO 2026-04-20 02:46:56 Resource accessed /login by administrator from 10.10.1.5
+ALERT 2026-04-20 02:46:59 Unauthorized access attempt to /admin from 198.199.88.1
+ALERT 2026-04-20 02:47:02 Rate limit exceeded - too many requests from 45.33.32.156
+WARNING 2026-04-20 02:47:05 Failed password for invalid user alice from 198.199.88.1 port 22 ssh2
+INFO 2026-04-20 02:47:08 Session created for alice from 172.16.0.12
+INFO 2026-04-20 02:47:11 Resource accessed /api/data by root from 172.16.0.12
+INFO 2026-04-20 02:47:14 POST /dashboard 200 from 172.16.0.12
+INFO 2026-04-20 02:47:17 Session created for john from 10.0.0.5
+WARNING 2026-04-20 02:47:20 Failed password for invalid user ubuntu from 45.33.32.156 port 22 ssh2
+ALERT 2026-04-20 02:47:23 Unauthorized access attempt to /admin from 185.220.101.45
+INFO 2026-04-20 02:47:26 POST /.env 200 from 10.0.0.5
+CRITICAL 2026-04-20 02:47:29 XSS attempt detected: <script>alert(1)</script> from 103.21.244.0
+WARNING 2026-04-20 02:47:32 Failed password for invalid user john from 45.33.32.156 port 22 ssh2
+INFO 2026-04-20 02:47:35 User 'ubuntu' logged in successfully from 10.0.0.5
+INFO 2026-04-20 02:47:38 PUT /wp-admin 200 from 172.16.0.12
+INFO 2026-04-20 02:47:41 User 'admin' logged in successfully from 10.10.1.5
+CRITICAL 2026-04-20 02:47:44 XSS attempt detected: <script>alert(1)</script> from 45.33.32.156
+INFO 2026-04-20 02:47:47 Resource accessed /login by john from 10.0.0.5
+ERROR 2026-04-20 02:47:50 403 Forbidden /.env from 185.220.101.45 - admin
+INFO 2026-04-20 02:47:53 User 'administrator' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:47:56 Session created for ubuntu from 192.168.1.10
+CRITICAL 2026-04-20 02:47:59 Possible SQL injection attempt detected: union select from 185.220.101.45
+ERROR 2026-04-20 02:48:02 sudo: guest: command not allowed ; TTY=pts/0 ; from 45.33.32.156
+INFO 2026-04-20 02:48:05 GET /wp-admin 200 from 172.16.0.12
+INFO 2026-04-20 02:48:08 Resource accessed /login by administrator from 192.168.1.10
+INFO 2026-04-20 02:48:11 PUT / 200 from 10.0.0.5
+INFO 2026-04-20 02:48:14 GET /login 200 from 192.168.1.10
+WARNING 2026-04-20 02:48:17 Directory traversal attempt ../../etc/passwd from 45.33.32.156
+INFO 2026-04-20 02:48:20 User 'alice' logged in successfully from 192.168.1.10
+INFO 2026-04-20 02:48:23 Resource accessed /admin by root from 192.168.1.10
+WARNING 2026-04-20 02:48:26 Directory traversal attempt ../../etc/passwd from 45.33.32.156
+INFO 2026-04-20 02:48:29 PUT / 200 from 192.168.1.10
+INFO 2026-04-20 02:48:32 Resource accessed /admin by root from 10.10.1.5
+INFO 2026-04-20 02:48:35 Resource accessed /wp-admin by guest from 172.16.0.12
+ALERT 2026-04-20 02:48:38 Rate limit exceeded - too many requests from 45.33.32.156
+ERROR 2026-04-20 02:48:41 Authentication failure for root from 198.199.88.1
+INFO 2026-04-20 02:48:44 User 'admin' logged in successfully from 10.10.1.5
+INFO 2026-04-20 02:48:47 Resource accessed /login by john from 172.16.0.12
+WARNING 2026-04-20 02:48:50 Failed password for invalid user john from 103.21.244.0 port 22 ssh2
+INFO 2026-04-20 02:48:53 PUT /login 200 from 192.168.1.10
+INFO 2026-04-20 02:48:56 Resource accessed /.env by root from 10.0.0.5
+ALERT 2026-04-20 02:48:59 Rate limit exceeded - too many requests from 45.33.32.156
+INFO 2026-04-20 02:49:02 PUT /api/data 200 from 10.0.0.5
+INFO 2026-04-20 02:49:05 POST /api/data 200 from 10.0.0.5
+ALERT 2026-04-20 02:49:08 Unauthorized access attempt to /admin from 103.21.244.0
+INFO 2026-04-20 02:49:11 User 'administrator' logged in successfully from 172.16.0.12
+INFO 2026-04-20 02:49:14 User 'root' logged in successfully from 10.0.0.5
+INFO 2026-04-20 02:49:17 Resource accessed /wp-admin by ubuntu from 10.0.0.5
+ALERT 2026-04-20 02:49:20 Rate limit exceeded - too many requests from 103.21.244.0
+INFO 2026-04-20 02:49:23 Resource accessed /admin by root from 10.10.1.5
